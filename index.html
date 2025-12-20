@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnWord - 學前兒童英文學習App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Categories Section */
+        .categories {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .vip-badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: white;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 20px 60px rgba(245, 87, 108, 0.4);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #FFD700;
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            padding: 12px 40px;
+            background: white;
+            color: #667eea;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                📚 LearnWord
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">功能</a></li>
+                <li><a href="#categories">類別</a></li>
+                <li><a href="#pricing">價格</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🌟 LearnWord</h1>
+            <p>專為 3-7 歲兒童設計的英文學習App</p>
+            <p style="font-size: 1.2rem; margin-top: -1rem;">讓孩子在遊戲中快樂學習英文 🎮</p>
+            <a href="#" class="cta-button">立即下載 App Store</a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <h2 class="section-title">學習成果</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">234</div>
+                    <div class="stat-label">精選單字</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">17</div>
+                    <div class="stat-label">學習類別</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">實用句型</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">測驗模式</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">✨ 核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>互動學習</h3>
+                    <p>卡片式學習設計，搭配可愛的 emoji 圖示，視覺化學習更有趣。每個單字都有標準美式英語發音，可重複播放。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>多元測驗</h3>
+                    <p>4 種測驗模式：聽音選圖、看圖選字、看字選圖、發音驗證。讓孩子從聽、說、讀、寫全方位學習。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎤</div>
+                    <h3>發音驗證</h3>
+                    <p>使用 Apple 語音識別技術，即時檢測發音準確度，給予即時反饋，幫助孩子說出標準英語。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>每日打卡</h3>
+                    <p>養成良好學習習慣！每日完成學習目標即可打卡，追蹤連續學習天數，獲得成就感。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>錯題本</h3>
+                    <p>自動收集錯題，重點複習。針對孩子的弱點加強練習，學習更有效率。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>複讀模式</h3>
+                    <p>自動播放選定類別的所有單字，英文發音 + 中文解釋，讓孩子反覆聆聽，加深記憶。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>學習統計</h3>
+                    <p>完整的學習進度追蹤，了解孩子的學習狀況，哪些類別已掌握，哪些需要加強。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <h3>自訂類別</h3>
+                    <p>VIP 專屬功能！家長可自訂類別和單字，為孩子量身打造個人化學習內容。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="section categories">
+        <div class="container">
+            <h2 class="section-title">📚 學習類別</h2>
+            <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">免費版 (6 個類別，69 個單字)</h3>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🔤</div>
+                    <h3>字母</h3>
+                    <p class="category-count">26 個字母</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🐕</div>
+                    <h3>動物</h3>
+                    <p class="category-count">17 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🎨</div>
+                    <h3>顏色</h3>
+                    <p class="category-count">8 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🔢</div>
+                    <h3>數字</h3>
+                    <p class="category-count">10 個數字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍎</div>
+                    <h3>水果</h3>
+                    <p class="category-count">11 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💬</div>
+                    <h3>簡單句型</h3>
+                    <p class="category-count">10 個句子</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin: 4rem 0 2rem; font-size: 1.5rem;">VIP 專屬 (11 個類別，165 個單字) <span class="vip-badge">⭐ VIP</span></h3>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">💬</div>
+                    <h3>進階句型 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">20 個實用對話</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🥦</div>
+                    <h3>蔬菜 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">9 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👨‍👩‍👧‍👦</div>
+                    <h3>家庭成員 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">12 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👁️</div>
+                    <h3>身體部位 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">14 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🏠</div>
+                    <h3>家居物品 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">15 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍽️</div>
+                    <h3>食物飲料 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">14 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👕</div>
+                    <h3>衣服配飾 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">13 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">⚽</div>
+                    <h3>運動活動 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">13 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🚗</div>
+                    <h3>交通工具 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">16 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">☀️</div>
+                    <h3>天氣自然 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">18 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">😊</div>
+                    <h3>情緒動作 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">15 個單字</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🎒</div>
+                    <h3>學校用品 <span class="vip-badge">VIP</span></h3>
+                    <p class="category-count">13 個單字</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section pricing">
+        <div class="container">
+            <h2 class="section-title">💰 升級方案</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>免費版</h3>
+                    <div class="price">NT$0</div>
+                    <p class="price-period">永久免費</p>
+                    <ul class="features-list">
+                        <li>6 個基礎類別</li>
+                        <li>69 個精選單字</li>
+                        <li>簡單句型 (10 個)</li>
+                        <li>所有測驗模式</li>
+                        <li>發音驗證功能</li>
+                        <li>每日打卡功能</li>
+                        <li>錯題本功能</li>
+                    </ul>
+                    <a href="#" class="pricing-button">立即下載</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">🔥 推薦</div>
+                    <h3>VIP 終身版</h3>
+                    <div class="price">NT$90</div>
+                    <p class="price-period">一次付費，終身擁有</p>
+                    <ul class="features-list">
+                        <li>解鎖所有 17 個類別</li>
+                        <li>234 個精選單字</li>
+                        <li>進階句型 (20 個實用對話)</li>
+                        <li>自訂類別功能</li>
+                        <li>自訂單字功能</li>
+                        <li>高級學習統計</li>
+                        <li>所有未來新增內容</li>
+                        <li>無廣告體驗</li>
+                    </ul>
+                    <a href="#" class="pricing-button" style="background: #FFD700; color: #333;">立即升級</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #f7fafc; border-radius: 20px;">
+                <h3 style="color: #333; margin-bottom: 1rem;">為什麼選擇 VIP？</h3>
+                <p style="color: #666; font-size: 1.1rem; line-height: 1.8;">
+                    ✅ 內容增加 3.4 倍 (69 → 234 個單字)<br>
+                    ✅ 從單詞到句子的完整學習路徑<br>
+                    ✅ 終身擁有，不是訂閱制<br>
+                    ✅ 物超所值，每個單字只要 NT$0.38<br>
+                    ✅ 支持開發者持續更新
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 LearnWord. All rights reserved.</p>
+            <p><a href="https://nightlu.github.io/learnword-privacy/" target="_blank">隱私政策</a></p>
+            <p>讓孩子在快樂中學習英文 💙</p>
+        </div>
+    </footer>
+</body>
+</html>
+
